@@ -1,5 +1,4 @@
 ﻿
-using System.Diagnostics;
 
 namespace Exercise1
 {
@@ -7,9 +6,9 @@ namespace Exercise1
     {
         static bool takeInput = true;
         static Queue<Process> ProcessQueue = new Queue<Process>();
+        static Queue<Process> OutputQueue = new Queue<Process>();
         
         static int turn = 0;
-        static Stopwatch stopWatch = new Stopwatch();
         static int totalWaitingTime = 0;
         static float averageWaitingTime = 0f;
         static int totalTurnAroundTime = 0;
@@ -25,7 +24,7 @@ namespace Exercise1
                 return;
             }
 
-            ProcessQueue.OrderBy(p => p.EntryTime); // Sort processes by entry time
+            ProcessQueue = new Queue<Process>(ProcessQueue.OrderBy(p => p.EntryTime)); // Sort processes by entry time
 
             RunCalculations();
 
@@ -38,12 +37,12 @@ namespace Exercise1
 
             while (takeInput)
             {
-                if (Console.ReadLine().ToLower().Equals("q")) { takeInput = false; break; }
+                var input = Console.ReadLine();
+                if (input.ToLower().Equals("q")) { takeInput = false; return; }
 
-                string[] input = Console.ReadLine().Split(",");
+                string[] inputArray = input.Split(',');
 
-                ProcessQueue.Enqueue(new Process(input[0], Convert.ToInt32(input[1]), Convert.ToInt32(input[2])));
-
+                ProcessQueue.Enqueue(new Process(inputArray[0], Convert.ToInt32(inputArray[1]), Convert.ToInt32(inputArray[2])));
             }
         }
 
@@ -53,11 +52,13 @@ namespace Exercise1
         }
 
         private static void RunCalculations()
-        {
-            stopWatch.Start();
-
-            foreach (var currentProcess in ProcessQueue)
+        { 
+            while (ProcessQueue.Count > 0)
             {
+                while (ProcessQueue.Peek().EntryTime > turn) { turn++; }
+
+                var currentProcess = ProcessQueue.Dequeue();
+
                 currentProcess.StartTime = turn;
 
                 for (int n = 0; n < currentProcess.BurstTime; n++) { turn++; }
@@ -69,13 +70,13 @@ namespace Exercise1
                 currentProcess.TurnAroundTime = turn - currentProcess.EntryTime;
 
                 totalTurnAroundTime += currentProcess.TurnAroundTime;
+
+                OutputQueue.Enqueue(currentProcess);
             }
 
-            stopWatch.Stop();
+            averageWaitingTime = (float)totalWaitingTime / OutputQueue.Count;
 
-            averageWaitingTime = totalWaitingTime / ProcessQueue.Count;
-
-            averageTurnAroundTime = totalTurnAroundTime / ProcessQueue.Count;
+            averageTurnAroundTime = (float)totalTurnAroundTime / OutputQueue.Count;
         }
 
         private static void PrintResults()
@@ -83,14 +84,13 @@ namespace Exercise1
 
             Console.WriteLine(string.Format("{0,-10}{1,-10}{2,-10}", "Name", "Waiting", "Turn-around"));
 
-            foreach (Process process in ProcessQueue)
+            foreach (var process in OutputQueue)
             {
                 Console.WriteLine(string.Format("{0,-10}{1,-10}{2,-10}", process.Name, process.WaitingTime.ToString(), process.TurnAroundTime.ToString()));
             }
 
             Console.WriteLine($"Average waiting time: {averageWaitingTime}");
             Console.WriteLine($"Average turn-around time: {averageTurnAroundTime}");
-            Console.WriteLine($"Execution time: {stopWatch.Elapsed}");
         }
     }
 }
