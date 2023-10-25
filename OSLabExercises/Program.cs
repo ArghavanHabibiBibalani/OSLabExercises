@@ -31,6 +31,7 @@ namespace Exercise1
             PrintResults();
         }
 
+        // Take all the inputs at once. Keep taking input untill the user enters 'q'.
         private static void TakeInput()
         {
             Console.WriteLine("Enter process name, burst time and entry time ([Name],[Burst time],[Entry time])\nEnter 'Q' to continue: ");
@@ -48,14 +49,14 @@ namespace Exercise1
 
         private static bool IsEmpty()
         {
-            return ProcessQueue.Peek() == null;
+            return ProcessQueue.Count == 0;
         }
 
         private static void RunCalculations()
         { 
             while (ProcessQueue.Count > 0)
             {
-                while (ProcessQueue.Peek().EntryTime > turn) { turn++; }
+                while (ProcessQueue.Peek().EntryTime > turn) { turn++; } // Ensure every blank time block is counted.
 
                 var currentProcess = ProcessQueue.Dequeue();
 
