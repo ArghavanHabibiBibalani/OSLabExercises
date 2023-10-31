@@ -2,19 +2,21 @@
 
 namespace Exercise1
 {
-    internal class Program
+    public class Exercise1Main
     {
         static bool takeInput = true;
         static Queue<Process> ProcessQueue = new Queue<Process>();
         static Queue<Process> OutputQueue = new Queue<Process>();
-        
+
         static int turn = 0;
         static int totalWaitingTime = 0;
         static float averageWaitingTime = 0f;
         static int totalTurnAroundTime = 0;
         static float averageTurnAroundTime = 0f;
 
-        static void Main(string[] args)
+        public Exercise1Main() { Run(); }
+
+        private void Run()
         {
             TakeInput();
 
@@ -53,7 +55,7 @@ namespace Exercise1
         }
 
         private static void RunCalculations()
-        { 
+        {
             while (ProcessQueue.Count > 0)
             {
                 while (ProcessQueue.Peek().EntryTime > turn) { turn++; } // Ensure every blank time block is counted.
