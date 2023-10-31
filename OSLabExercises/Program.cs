@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OSLabExercises.Exercise2
+namespace OSLabExercises
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            
+
         }
     }
 }
