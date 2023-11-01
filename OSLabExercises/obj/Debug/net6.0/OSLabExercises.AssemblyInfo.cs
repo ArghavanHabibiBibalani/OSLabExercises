@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OSLabExercises")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+de171a8814dd2b79cfad00f3f344615fb8d5978e")]
 [assembly: System.Reflection.AssemblyProductAttribute("OSLabExercises")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OSLabExercises")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

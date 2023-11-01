@@ -1,9 +1,15 @@
 ﻿
 
-namespace Exercise1
+namespace OSLabExercises.Exercise1
 {
     public class Exercise1Main
     {
+        /// <summary>
+        /// ATTENTION: EVERY SINGLE LINE OF CODE IN THIS PROJECT HAS BEEN AND WILL BE WRITTEN ONLY
+        /// BY ARGHAVAN HABIBI BIBALANI AND YASHAR POURALI BEHZAD AND NO SUGGESTIONS WERE TAKEN BY
+        /// ANOTHER INDIVIDUAL, TEAM OR AI MODEL
+        /// </summary>
+        /// 
         static bool takeInput = true;
         static Queue<Process> ProcessQueue = new Queue<Process>();
         static Queue<Process> OutputQueue = new Queue<Process>();

@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace OSLabExercises.Exercise2
 {
-    internal interface IProcess
-    { 
+    internal interface IProcess // Dalam
+    {
         public void StartProcess();
 
-        public IProcess Create(ProcessType processType, IManager manager)
+        public event Action<bool, IManager> ChangedBuffer;
+
+        public static IProcess Create(ProcessType processType, IManager manager, int sleepDuration) // Factory method
         {
             switch (processType)
             {
-                case ProcessType.PRODUCER: return new Producer(manager);
-                case ProcessType.CONSUMER: return new Consumer(manager);
+                case ProcessType.PRODUCER: return new Producer(manager, sleepDuration);
+                case ProcessType.CONSUMER: return new Consumer(manager, sleepDuration);
                 default: throw new NotSupportedException();
             }
         }

@@ -1,38 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace OSLabExercises.Exercise2
 {
     internal class Producer : IProcess
     {
+        private int _sleepDuration;
         private IManager _manager;
 
-        internal Producer(IManager manager)
+        internal Producer(IManager manager, int sleepDuration)
         {
+            _sleepDuration = sleepDuration;
             _manager = manager;
+            
         }
+        public event Action<bool, IManager> ChangedBuffer;
+
         public void StartProcess()
         {
             while(true)
             {
-                // Fix counting the buffer's contents
-                if (_manager.Buffer.Count() < _manager.Buffer.Length && _manager.Locked == false)
+                if (_manager.CountBuffer() < _manager.Capacity && _manager.Locked == false)
                 {
                     _manager.Lock();
                     Produce();
-                    _manager.Unlock();
+                    Thread.Sleep(_sleepDuration);
                 }
             }
         }
 
         private void Produce()
         {
-            _manager.Buffer[_manager.BufferIndex] = "Item " + _manager.BufferIndex + 1;
+            _manager.Buffer[_manager.BufferIndex] = "Item " + (_manager.BufferIndex + 1).ToString();
             if (_manager.BufferIndex < _manager.Buffer.Length - 1) { _manager.BufferIndex++; }
             _manager.IsCurrentlyProducing = true;
+            ChangedBuffer?.Invoke(true, _manager);
+            _manager.Unlock();
         }
     }
 }
