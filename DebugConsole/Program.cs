@@ -1,6 +1,6 @@
-﻿using Exer
+﻿using Exercise2;
 
-namespace OSLabExercises
+namespace DebugConsole
 {
     internal class Program
     {

@@ -1,6 +1,6 @@
 ﻿
 
-namespace OSLabExercises.Exercise1
+namespace Exercise1
 {
     internal class Process
     {

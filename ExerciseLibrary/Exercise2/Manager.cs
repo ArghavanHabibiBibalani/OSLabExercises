@@ -1,6 +1,6 @@
 ﻿
 
-namespace OSLabExercises.Exercise2
+namespace Exercise2
 {
     internal class Manager : IManager
     {
