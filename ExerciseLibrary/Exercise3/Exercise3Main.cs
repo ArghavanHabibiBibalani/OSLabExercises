@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace Exercise3
 {
@@ -14,7 +9,7 @@ namespace Exercise3
         /// BY ARGHAVAN HABIBI BIBALANI AND YASHAR POURALI BEHZAD AND NO SUGGESTIONS WERE TAKEN BY
         /// ANOTHER INDIVIDUAL, TEAM OR AI MODEL
         /// </summary>
-        public static void Run()
+        public void Run()
         {
             
             var philosophers = InitializePhilosophers();
@@ -35,7 +30,7 @@ namespace Exercise3
             }
         }
 
-        private static List<Philosopher> InitializePhilosophers()
+        private List<Philosopher> InitializePhilosophers()
         {
             Console.WriteLine("Enter Philosophers number: ");
 
