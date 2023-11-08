@@ -1,5 +1,4 @@
-﻿using Exercise2;
-
+﻿using Exercise3;
 namespace DebugConsole
 {
     internal class Program
@@ -12,7 +11,7 @@ namespace DebugConsole
 
         static void Main(string[] args)
         {
-            Exercise2Main.Run(3, 1);
+            Exercise3Main.Run();
         }
     }
 }

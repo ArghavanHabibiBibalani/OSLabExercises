@@ -2,7 +2,7 @@
 
 namespace Exercise2
 {
-    public class Exercise2Main
+    public class Exercise3Main
     {
         /// <summary>
         /// ATTENTION: EVERY SINGLE LINE OF CODE IN THIS PROJECT HAS BEEN AND WILL BE WRITTEN ONLY
