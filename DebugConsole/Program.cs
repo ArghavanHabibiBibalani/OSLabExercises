@@ -1,4 +1,4 @@
-﻿using Exercise5;
+﻿using Exercise6;
 
 namespace DebugConsole
 {
@@ -12,7 +12,7 @@ namespace DebugConsole
 
         static void Main(string[] args)
         {
-            Exercise5Main.Run();
+            Exercise6Main.Run();
         }
     }
 }

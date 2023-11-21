@@ -56,6 +56,15 @@ namespace Exercise5
             {
                 Console.WriteLine("Enter process name: ");
                 name = Console.ReadLine();
+
+                if (_memoryManager.processIndexPairs.Where(pair => pair.Key.name.Equals(name)).ToList().Count != 0)
+                {
+                    Console.WriteLine("A process with that name already exists...");
+                    Console.WriteLine("Press enter to continue");
+                    Console.ReadLine();
+                    return;
+                }
+
                 Console.WriteLine("Enter process volume; ");
                 volume = Convert.ToInt32(Console.ReadLine());
 

@@ -4,6 +4,7 @@ namespace Exercise5
 {
     internal interface IMemoryManager
     {
+        public Dictionary<IProcess, int> processIndexPairs { get; }
         public void AllocateFirstFit(IProcess process);
 
         public void AllocateBestFit(IProcess process);

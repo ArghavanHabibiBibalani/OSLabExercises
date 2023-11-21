@@ -4,13 +4,13 @@ namespace Exercise5
 {
     internal class MemoryManager : IMemoryManager
     {
-        private Dictionary<IProcess, int> _processIndexPairs;
+        public Dictionary<IProcess, int> processIndexPairs { get; private set; }
         private List<IProcess[]> _processList;
         private int _totalMemorySlots;
 
         public MemoryManager(int totalMemorySlots, int memoryFragments)
         {
-            _processIndexPairs = new Dictionary<IProcess, int>();
+            processIndexPairs = new Dictionary<IProcess, int>();
             _processList = new List<IProcess[]>();
             _totalMemorySlots = totalMemorySlots;
             PartitionMemory(memoryFragments);
@@ -28,7 +28,7 @@ namespace Exercise5
                         {
                             array[LastIndex(array)] = process;
                         }
-                        _processIndexPairs.Add(process, _processList.IndexOf(array));
+                        processIndexPairs.Add(process, _processList.IndexOf(array));
                         break;
                     }
                 }
@@ -50,7 +50,7 @@ namespace Exercise5
                     }
                 }
             }
-            _processIndexPairs.Add(process, bestIndex);
+            processIndexPairs.Add(process, bestIndex);
             for (int i = 0; i < process.volume; i++)
             {
                 _processList[bestIndex][LastIndex(_processList[bestIndex])] = process;
@@ -71,7 +71,7 @@ namespace Exercise5
                     }
                 }
             }
-            _processIndexPairs.Add(process, worstIndex);
+            processIndexPairs.Add(process, worstIndex);
             for (int i = 0; i < process.volume; i++)
             {
                 _processList[worstIndex][LastIndex(_processList[worstIndex])] = process;
@@ -80,16 +80,17 @@ namespace Exercise5
 
         public void Deallocate(string processName)
         {
-            var process = _processIndexPairs.Where(pair => pair.Key.name == processName).Select(pair => pair.Key).ToList()[0];
-            var index = _processIndexPairs.Where(pair => pair.Key.name == processName).Select(pair => pair.Value).ToList()[0];
-            for (int i = 0; i < process.volume; i++)
+            var process = processIndexPairs.Where(pair => pair.Key.name == processName).Select(pair => pair.Key).ToList()[0];
+            var index = processIndexPairs.Where(pair => pair.Key.name == processName).Select(pair => pair.Value).ToList()[0];
+            for (int i = 0; i < process.volume;)
             {
                 if (_processList[index][i] == process)
                 {
                     _processList[index][i] = null;
+                    i++;
                 }
             }
-            _processIndexPairs.Remove(process);
+            processIndexPairs.Remove(process);
         }
 
         public void DisplayMemory()
